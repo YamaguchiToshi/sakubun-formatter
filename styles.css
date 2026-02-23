@@ -1,0 +1,340 @@
+:root {
+    --bg-color: #f0f4f8;
+    --paper-color: #ffffff;
+    --grid-color: #3b8c66;
+    /* 伝統的な緑色の罫線 */
+    --text-color: #333333;
+    --primary-color: #4361ee;
+    --primary-hover: #3f37c9;
+    --input-bg: #fafafa;
+    --border-color: #ddd;
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --paper-color: #1e1e1e;
+    --grid-color: #4a9e73;
+    --text-color: #e0e0e0;
+    --primary-color: #637eff;
+    --primary-hover: #839aff;
+    --input-bg: #2d2d2d;
+    --border-color: #444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+header p {
+    color: #555;
+}
+
+.input-section {
+    background: var(--paper-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+}
+
+.control-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.control-group label {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.text-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1.1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Noto Serif JP', serif;
+    transition: all 0.3s ease;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+textarea.text-input {
+    height: 300px;
+    padding: 1.5rem;
+    resize: vertical;
+    margin-bottom: 1.5rem;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    background-color: var(--paper-color);
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+button {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+button:active:not(:disabled) {
+    transform: translateY(2px);
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 6px rgba(67, 97, 238, 0.3);
+}
+
+.primary-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    box-shadow: 0 6px 8px rgba(67, 97, 238, 0.4);
+}
+
+.secondary-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.secondary-btn:hover:not(:disabled) {
+    background-color: #5a6268;
+}
+
+.theme-toggle-btn {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--paper-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 1.5rem;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+/* =========================================
+   原稿用紙 (Genkouyoushi) Styling
+   ========================================= */
+#print-area {
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding-bottom: 3rem;
+}
+
+.genkouyoushi-page {
+    /* A4 landscape proportions */
+    width: 297mm;
+    height: 210mm;
+    background-color: var(--paper-color);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 25mm 30mm;
+    /* 適度な余白 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.genkouyoushi-container {
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--grid-color);
+    padding: 2px;
+    /* 外枠とマスの間の遊び */
+}
+
+.genkouyoushi-grid {
+    display: flex;
+    flex-direction: row-reverse;
+    border: 1px solid var(--grid-color);
+    height: 100%;
+    width: 100%;
+}
+
+.genkouyoushi-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* 20列均等 */
+    border-left: 1px solid var(--grid-color);
+}
+
+.genkouyoushi-column:last-child {
+    border-left: none;
+    /* Prevent double border on the leftmost edge */
+}
+
+.genkouyoushi-square {
+    flex: 1;
+    /* 20行均等 */
+    border-bottom: 1px solid var(--grid-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.4rem;
+    color: var(--text-color);
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    position: relative;
+    line-height: 1;
+}
+
+
+
+
+
+.genkouyoushi-square:last-child {
+    border-bottom: none;
+}
+
+/* 中央の空白（10列目と11列目の間） */
+/* nth-child(10) is the 10th column from the right since row-reverse.
+   It needs a left margin to separate it from the 11th column. */
+.genkouyoushi-column:nth-child(10) {
+    margin-left: 2em;
+    position: relative;
+}
+
+.genkouyoushi-column:nth-child(11) {
+    border-right: 1px solid var(--grid-color);
+}
+
+.genkouyoushi-column:nth-child(10)::after {
+    /* 飾り（魚尾 - ぎょび）の代わりのシンプルな線 */
+    content: '';
+    position: absolute;
+    left: -1em;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 20%;
+    width: 1px;
+    background-color: var(--grid-color);
+}
+
+/* =========================================
+   Print Styles (ChromeOS & iPadOS Safari Target)
+   ========================================= */
+@media print {
+
+    /* 印刷時は強制的にライトモードの色（インク節約・白背景）にする */
+    :root,
+    body,
+    body.dark-mode {
+        --bg-color: #ffffff !important;
+        --paper-color: #ffffff !important;
+        --grid-color: #3b8c66 !important;
+        --text-color: #333333 !important;
+    }
+
+    @page {
+        size: A4 landscape;
+        margin: 0;
+        /* ブラウザのデフォルトヘッダ/フッタ余白を消す */
+    }
+
+    body {
+        background-color: white !important;
+        color: black !important;
+        margin: 0;
+        padding: 0;
+        /* iPad Safariでの意図しない縮小を防ぐ */
+        -webkit-text-size-adjust: 100%;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    #print-area {
+        margin: 0;
+        gap: 0;
+        padding: 0;
+        display: block;
+        /* Flexboxの不要なレイアウト制御を解除 */
+    }
+
+    .genkouyoushi-page {
+        width: 297mm;
+        height: 210mm;
+        box-sizing: border-box;
+        box-shadow: none;
+        padding: 20mm 25mm;
+        /* 印刷可能領域に収めるための余白調整 */
+        margin: 0 auto;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+
+        /* iPad Safari 特有のセンタリングのズレを解消するため明示的にBlockにする */
+        display: flex;
+    }
+
+    /* 最終ページの改ページを防ぐ */
+    .genkouyoushi-page:last-child {
+        page-break-after: auto;
+    }
+}
